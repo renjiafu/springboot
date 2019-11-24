@@ -15,6 +15,7 @@ public interface UserMapper {
             @Result(property = "password", column = "password", javaType = String.class)
     })
     List<MysqlUser> getAll();
+/*
 
     @Select("select * from mysql_user where id=#{id}")
     @Results({
@@ -32,6 +33,7 @@ public interface UserMapper {
 
     @Delete("delete from mysql_user where id=#{id}")
     int delete(int id);
+*/
 
 
 

@@ -20,7 +20,7 @@ public class WebController {
     public List<MysqlUser> getAll(){
         return userMapper.getAll();
     }
-
+/*
     @RequestMapping(value = "/getOne/{id}")
     public MysqlUser getOne(@PathVariable(value = "id") int id){
         return userMapper.getOne(id);
@@ -46,4 +46,9 @@ public class WebController {
     public int delete(@PathVariable int id){
         return userMapper.delete(id);
    }
+
+
+ */
+
+
 }
