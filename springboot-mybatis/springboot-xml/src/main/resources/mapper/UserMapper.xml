@@ -8,12 +8,72 @@
         <result column="name" property="name" />
         <result column="password" property="password" />
     </resultMap>
+    
+    <sql id="userColums" >
+        name,password
+    </sql>
 
-    <select id="findById" resultMap="BaseResultMap">
-        select * from mysql_user where id = #{id}
-    </select>
 
     <select id="getAll" resultMap="BaseResultMap">
         select * from mysql_user
     </select>
+
+    <select id="findById" resultMap="BaseResultMap">
+        select
+        <include refid="userColums"></include>
+         from mysql_user where id = #{id}
+    </select>
+
+    <insert id="insert" >
+        insert into mysql_user (name,password)
+        values (#{name},#{password})
+    </insert>
+
+    <update id="update">
+        update mysql_user set
+            name=#{name},
+            password=#{password}
+        where name=#{name}
+    </update>
+
+    <delete id="delete">
+        delete from mysql_user where id=#{id}
+    </delete>
+
+
+
+  <!--  choose标签 辅助标签wehn otherwise-->
+    <select id="findUserLikeNameAndPassword" resultType="com.rjf.pojo.User">
+        select
+        <include refid="userColums"></include>
+        from mysql_user
+        where 1=1
+        <choose>
+            <when test="name!=null">
+                and name=#{name}
+            </when>
+            <when test="password!=null">
+                and password=#{password}
+            </when>
+            <otherwise>
+                and 1=1
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--trim标签 辅助标签where set-->
+    <select id="findUserLike" resultMap="BaseResultMap">
+        select
+        <include refid="userColums"></include>
+        from mysql_user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="password!=null">
+                and password=#{password}
+            </if>
+        </trim>
+    </select>
+
 </mapper>

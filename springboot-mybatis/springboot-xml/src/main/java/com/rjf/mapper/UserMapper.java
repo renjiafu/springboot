@@ -11,4 +11,18 @@ public interface UserMapper {
 
     List<User> getAll();
 
+    User findById(int id);
+
+    int insert(User user);
+
+    int update(User user);
+
+    int delete(int id);
+
+    //choose
+    User findUserLikeNameAndPassword(User user);
+
+    //trim
+    User findUserLike(User user);
+
 }
