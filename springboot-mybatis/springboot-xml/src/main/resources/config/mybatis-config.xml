@@ -6,6 +6,4 @@
     <typeAliases>
         <package name="com.rjf.pojo"/>
     </typeAliases>
-    <!--<mappers>-->
-    <!--</mappers>-->
 </configuration>

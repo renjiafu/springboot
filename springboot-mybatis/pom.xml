@@ -14,6 +14,7 @@
     <modules>
         <module>springboot-annotation</module>
         <module>springboot-xml</module>
+        <module>springboot-starter</module>
     </modules>
 
 

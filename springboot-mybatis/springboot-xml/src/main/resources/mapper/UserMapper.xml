@@ -10,12 +10,14 @@
     </resultMap>
     
     <sql id="userColums" >
-        name,password
+        id,name,password
     </sql>
 
 
     <select id="getAll" resultMap="BaseResultMap">
-        select * from mysql_user
+        select
+        <include refid="userColums"></include>
+         from mysql_user
     </select>
 
     <select id="findById" resultMap="BaseResultMap">
