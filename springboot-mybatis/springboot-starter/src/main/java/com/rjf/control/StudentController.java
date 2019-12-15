@@ -54,4 +54,6 @@ public class StudentController {
         return studentDao.getClsByTwoObjParam(cls,student);
     }
 
+
+
 }

@@ -94,7 +94,6 @@
     </select>
 
     <!--@Param双对象传参-->
-
     <select id="getClsByTwoObjParam" resultMap="Base_Cls">
         select
           c.id,
@@ -109,8 +108,9 @@
             <if test="cls.id !=null">and c.id = #{cls.id} </if>
             <if test="student.id !=null">and s.id=#{student.id}</if>
         </where>
-
     </select>
+
+
 
 
 
