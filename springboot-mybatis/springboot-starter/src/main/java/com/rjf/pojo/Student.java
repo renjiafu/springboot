@@ -5,7 +5,7 @@ public class Student {
     private int id;
     private String name;
     private String password;
-    private int clsId;
+    private Integer clsId;
     private Cls cls;
 
     public int getId() {
@@ -32,11 +32,11 @@ public class Student {
         this.password = password;
     }
 
-    public int getClsId() {
+    public Integer getClsId() {
         return clsId;
     }
 
-    public void setClsId(int clsId) {
+    public void setClsId(Integer clsId) {
         this.clsId = clsId;
     }
 

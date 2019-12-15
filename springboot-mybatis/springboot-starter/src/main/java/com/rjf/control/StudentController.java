@@ -5,10 +5,7 @@ import com.rjf.mapper.StudentDao;
 import com.rjf.pojo.Cls;
 import com.rjf.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
@@ -37,6 +34,24 @@ public class StudentController {
    /*     Student student1=new Student();
         student1.setId(1);*/
         return studentDao.getStudentByStudent(student);
+    }
+
+    @RequestMapping("/getStudentByStudentParam")
+    public Student getStudentByStudentParam(@RequestBody Student student){
+
+        return studentDao.getStudentByStudentParam(student);
+    }
+
+    @RequestMapping("/getClsByTwoObjParam")
+    public Cls getClsByTwoObjParam(){
+
+        Student student=new Student();
+        student.setId(1);student.setName("xiaoming");
+
+        Cls cls=new Cls();
+//        cls.setId(1);cls.setClsName("一班");
+
+        return studentDao.getClsByTwoObjParam(cls,student);
     }
 
 }

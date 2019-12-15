@@ -8,7 +8,7 @@
         select  * from student where id=#{id}
     </select>
 
-
+    <!--聚合对象-->
     <resultMap id="Base_Student" type="Student">
         <result column="id" property="id" jdbcType="NUMERIC"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -19,7 +19,6 @@
             <result column="clsname" property="clsName" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
-
 
     <select id="getStudent" resultMap="Base_Student">
           select
@@ -32,7 +31,7 @@
           left join cls c on s.clsid=c.id
           where s.id=#{id}
     </select>
-
+    <!--聚合列表-->
     <resultMap id="Base_Cls" type="Cls">
         <result column="id" property="id" jdbcType="NUMERIC"/>
         <result column="clsname" property="clsName" jdbcType="VARCHAR"/>
@@ -79,5 +78,41 @@
 
         </where>
     </select>
+
+    <!--@Param传参-->
+    <select id="getStudentByStudentParam" resultType="Student">
+        select *
+        from student s
+        <where>
+            <if test="student.id !=null">
+                and s.id=#{student.id}
+            </if>
+            <if test="student.name">
+                and s.name=#{student.name}
+            </if>
+        </where>
+    </select>
+
+    <!--@Param双对象传参-->
+
+    <select id="getClsByTwoObjParam" resultMap="Base_Cls">
+        select
+          c.id,
+          c.clsname,
+          s.id,
+          s.name,
+          s.password,
+          s.clsid
+        from cls c
+        left join student s on c.id=s.clsid
+        <where>
+            <if test="cls.id !=null">and c.id = #{cls.id} </if>
+            <if test="student.id !=null">and s.id=#{student.id}</if>
+        </where>
+
+    </select>
+
+
+
 
 </mapper>
