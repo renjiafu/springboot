@@ -54,6 +54,13 @@ public class StudentController {
         return studentDao.getClsByTwoObjParam(cls,student);
     }
 
+    @GetMapping("/insert")
+    public String insert(){
+        Student student=new Student(20,"xiaohu","888888",1);
+        return studentDao.insert(student).toString();
+
+    }
+
 
 
 }

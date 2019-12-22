@@ -110,6 +110,17 @@
         </where>
     </select>
 
+    <insert id="insert" >
+        insert into student
+        (id,name,password,clsid)
+        values(
+        #{id},
+        #{name},
+        #{password},
+        #{clsId}
+        )
+    </insert>
+
 
 
 

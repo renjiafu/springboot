@@ -20,6 +20,7 @@ public interface StudentDao {
 
     Cls getClsByTwoObjParam(@Param("cls") Cls cls, @Param("student") Student student);
 
+    Integer insert(Student student);
 
 
 }

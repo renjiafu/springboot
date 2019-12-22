@@ -8,6 +8,17 @@ public class Student {
     private Integer clsId;
     private Cls cls;
 
+    public Student() {
+    }
+
+    public Student(int id, String name, String password, Integer clsId) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.clsId = clsId;
+
+    }
+
     public int getId() {
         return id;
     }
