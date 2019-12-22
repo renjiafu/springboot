@@ -22,10 +22,9 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND,reason = "Resouce lost >.<")
     @ExceptionHandler(Exception.class)
     public void notFound(){
-
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public Flux<User> list(){
         return this.userService.list();
     }

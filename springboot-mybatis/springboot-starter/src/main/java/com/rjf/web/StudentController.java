@@ -1,4 +1,4 @@
-package com.rjf.control;
+package com.rjf.web;
 
 
 import com.rjf.mapper.StudentDao;

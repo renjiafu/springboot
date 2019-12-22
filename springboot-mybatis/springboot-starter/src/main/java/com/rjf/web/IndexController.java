@@ -1,4 +1,4 @@
-package com.rjf.control;
+package com.rjf.web;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
