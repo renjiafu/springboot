@@ -1,6 +1,6 @@
 package com.rjf.pojo;
 
-public class MysqlUser {
+public class User {
     private Integer id;
     private String name;
     private String password;
@@ -34,7 +34,7 @@ public class MysqlUser {
 
     @Override
     public String toString() {
-        return "MysqlUser{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
