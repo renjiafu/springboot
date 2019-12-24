@@ -4,24 +4,44 @@ import java.util.List;
 
 public class Cls {
 
-    private Integer id;
-    private String clsName;
+    private Integer cid;
+    private String cname;
+    private String monitor;
+
     private List<Student> students;
 
-    public Integer getId() {
-        return id;
+    public Cls() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Cls(Integer cid, String cname, String monitor, List<Student> students) {
+        this.cid = cid;
+        this.cname = cname;
+        this.monitor = monitor;
+        this.students = students;
     }
 
-    public String getClsName() {
-        return clsName;
+    public Integer getCid() {
+        return cid;
     }
 
-    public void setClsName(String clsName) {
-        this.clsName = clsName;
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    public String getMonitor() {
+        return monitor;
+    }
+
+    public void setMonitor(String monitor) {
+        this.monitor = monitor;
     }
 
     public List<Student> getStudents() {
@@ -35,8 +55,10 @@ public class Cls {
     @Override
     public String toString() {
         return "Cls{" +
-                "id=" + id +
-                ", clsName='" + clsName + '\'' +
+                "cid=" + cid +
+                ", cname='" + cname + '\'' +
+                ", monitor='" + monitor + '\'' +
+                ", students=" + students +
                 '}';
     }
 }

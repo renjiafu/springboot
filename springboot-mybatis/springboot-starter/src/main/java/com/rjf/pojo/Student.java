@@ -2,37 +2,40 @@ package com.rjf.pojo;
 
 public class Student {
 
-    private int id;
-    private String name;
+    private Integer sid;
+    private String sname;
     private String password;
     private Integer clsId;
+    private Integer grade;
+
     private Cls cls;
 
     public Student() {
     }
 
-    public Student(int id, String name, String password, Integer clsId) {
-        this.id = id;
-        this.name = name;
+    public Student(Integer sid, String sname, String password, Integer clsId, Integer grade ) {
+        this.sid = sid;
+        this.sname = sname;
         this.password = password;
         this.clsId = clsId;
+        this.grade = grade;
 
     }
 
-    public int getId() {
-        return id;
+    public Integer getSid() {
+        return sid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSid(Integer sid) {
+        this.sid = sid;
     }
 
-    public String getName() {
-        return name;
+    public String getSname() {
+        return sname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSname(String sname) {
+        this.sname = sname;
     }
 
     public String getPassword() {
@@ -51,6 +54,14 @@ public class Student {
         this.clsId = clsId;
     }
 
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
     public Cls getCls() {
         return cls;
     }
@@ -62,10 +73,12 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "sid=" + sid +
+                ", sname='" + sname + '\'' +
                 ", password='" + password + '\'' +
-                ", cls=" + clsId +
+                ", clsId=" + clsId +
+                ", grade=" + grade +
+                ", cls=" + cls +
                 '}';
     }
 }

@@ -8,11 +8,11 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface StudentDao {
 
-    Student getOne(int id);
+    Student getOne(int sid);
 
-    Student getStudent(int id);
+    Student getStudent(int sid);
 
-    Cls getCls(int id);
+    Cls getClsById(int cid);
 
     Student getStudentByStudent(Student student);
 
@@ -20,7 +20,7 @@ public interface StudentDao {
 
     Cls getClsByTwoObjParam(@Param("cls") Cls cls, @Param("student") Student student);
 
-    Integer insert(Student student);
+    Integer insertStudent(Student student);
 
 
 }

@@ -5,55 +5,52 @@
 <mapper namespace="com.rjf.mapper.StudentDao">
 
     <select id="getOne" resultType="Student">
-        select  * from student where id=#{id}
+        select  * from student where sid=#{sid}
     </select>
 
     <!--聚合对象-->
-    <resultMap id="Base_Student" type="Student">
-        <result column="id" property="id" jdbcType="NUMERIC"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="clsid" property="clsId" jdbcType="NUMERIC"/>
-        <association  property="cls" javaType="Cls">
-            <result column="id" property="id" jdbcType="NUMERIC"/>
-            <result column="clsname" property="clsName" jdbcType="VARCHAR"/>
+    <resultMap id="Base_Student" type="Student" autoMapping="true">
+        <id column="sid" property="sid" jdbcType="NUMERIC"/>
+        <association  property="cls" javaType="Cls" autoMapping="true">
+           <id column="cid" property="cid" jdbcType="NUMERIC"/>
         </association>
     </resultMap>
 
     <select id="getStudent" resultMap="Base_Student">
           select
-            s.id,
-            s.name,
+            s.sid,
+            s.sname,
             s.password,
-            c.id,
-            c.clsname
+            s.clsid,
+            c.cid,
+            c.cname,
+            c.monitor
           from student s
-          left join cls c on s.clsid=c.id
-          where s.id=#{id}
+          left join cls c on s.clsid=c.cid
+          where s.sid=#{sid}
     </select>
+
     <!--聚合列表-->
-    <resultMap id="Base_Cls" type="Cls">
-        <result column="id" property="id" jdbcType="NUMERIC"/>
-        <result column="clsname" property="clsName" jdbcType="VARCHAR"/>
-        <collection column="id" property="students" javaType="ArrayList" ofType="Student">
-            <result column="id" property="id" jdbcType="NUMERIC"/>
-            <result column="name" property="name" jdbcType="VARCHAR"/>
-            <result column="password" property="password" jdbcType="VARCHAR"/>
-            <result column="clsid" property="clsId" jdbcType="NUMERIC"/>
+    <resultMap id="Base_Cls" type="Cls" autoMapping="true">
+       <id column="cid" property="cid" jdbcType="NUMERIC"/>
+        <collection column="id" property="students" javaType="ArrayList" ofType="Student" autoMapping="true">
+            <id column="sid" property="sid" jdbcType="NUMERIC"/>
         </collection>
     </resultMap>
 
-    <select id="getCls" resultMap="Base_Cls" >
+    <select id="getClsById" resultMap="Base_Cls" >
         select
-          c.id,
-          c.clsname,
-          s.id,
-          s.name,
+          c.cid,
+          c.cname,
+          c.monitor,
+          s.sid,
+          s.sname,
           s.password,
-          s.clsid
+          s.clsid,
+          s.grade
         from cls c
-        left join student s on c.id=s.clsid
-        where c.id = #{id}
+        left join student s on c.cid=s.clsid
+        where c.cid = #{cid}
     </select>
 
 
@@ -63,11 +60,11 @@
         select *
         from student s
         <where>
-            <if test="id !=null">
-                and s.id=#{id}
+            <if test="sid !=null">
+                and s.sid=#{sid}
             </if>
-            <if test="name !=null">
-                and s.name=#{name}
+            <if test="sname !=null">
+                and s.sname=#{sname}
             </if>
             <if test="password !=null">
                 and s.password=#{password}
@@ -84,11 +81,11 @@
         select *
         from student s
         <where>
-            <if test="student.id !=null">
-                and s.id=#{student.id}
+            <if test="student.sid !=null">
+                and s.sid=#{student.sid}
             </if>
-            <if test="student.name">
-                and s.name=#{student.name}
+            <if test="student.sname">
+                and s.sname=#{student.sname}
             </if>
         </where>
     </select>
@@ -96,34 +93,31 @@
     <!--@Param双对象传参-->
     <select id="getClsByTwoObjParam" resultMap="Base_Cls">
         select
-          c.id,
-          c.clsname,
-          s.id,
-          s.name,
+          c.cid,
+          c.cname,
+          s.sid,
+          s.sname,
           s.password,
+          s.grade,
           s.clsid
         from cls c
-        left join student s on c.id=s.clsid
+        left join student s on c.cid=s.clsid
         <where>
-            <if test="cls.id !=null">and c.id = #{cls.id} </if>
-            <if test="student.id !=null">and s.id=#{student.id}</if>
+            <if test="cls.cid !=null">and c.cid = #{cls.cid} </if>
+            <if test="student.sid !=null">and s.sid=#{student.sid}</if>
         </where>
     </select>
 
-    <insert id="insert" >
+    <insert id="insertStudent" >
         insert into student
-        (id,name,password,clsid)
+        (sname,password,clsid,grade)
         values(
-        #{id},
-        #{name},
+        #{sname},
         #{password},
-        #{clsId}
+        #{clsId},
+        #{grade}
         )
     </insert>
-
-
-
-
 
 
 </mapper>

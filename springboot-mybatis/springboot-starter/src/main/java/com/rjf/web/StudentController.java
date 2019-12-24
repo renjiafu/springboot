@@ -4,6 +4,7 @@ package com.rjf.web;
 import com.rjf.mapper.StudentDao;
 import com.rjf.pojo.Cls;
 import com.rjf.pojo.Student;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,52 +14,50 @@ public class StudentController {
     @Autowired
     StudentDao studentDao;
 
-    @RequestMapping("/getStudentById/{id}")
-    public Student  getOne(@PathVariable("id") int id){
-        return studentDao.getOne(id);
+    @GetMapping("/getOne/{sid}")
+    public Student  getOne(@PathVariable("sid") int sid){
+        return studentDao.getOne(sid);
     }
 
-    @RequestMapping("/getStudentObjById/{id}")
-    public Student getStudentObj(@PathVariable("id") int id){
-        return studentDao.getStudent(id);
+    @GetMapping("/getStudent/{sid}")
+    public Student getStudent(@PathVariable("sid") int sid){
+        return studentDao.getStudent(sid);
     }
 
-    @RequestMapping("/getClsObjById/{id}")
-    public Cls getClsObj(@PathVariable("id") int id){
-        return studentDao.getCls(id);
+    @GetMapping("/getClsById/{cid}")
+    public Cls getClsById(@PathVariable("cid") int cid){
+        return studentDao.getClsById(cid);
     }
 
-    @RequestMapping("/getStudentByStudent")
+    @PostMapping("/getStudentByStudent")
     public Student getStudentByStudent(@RequestBody Student student){
-//        @RequestBody Student student
-   /*     Student student1=new Student();
-        student1.setId(1);*/
         return studentDao.getStudentByStudent(student);
     }
 
-    @RequestMapping("/getStudentByStudentParam")
+    @PostMapping("/getStudentByStudentParam")
     public Student getStudentByStudentParam(@RequestBody Student student){
 
         return studentDao.getStudentByStudentParam(student);
     }
 
-    @RequestMapping("/getClsByTwoObjParam")
+    @GetMapping("/getClsByTwoObjParam")
     public Cls getClsByTwoObjParam(){
 
         Student student=new Student();
-        student.setId(1);student.setName("xiaoming");
+        student.setSid(1);
+        student.setSname("xiaoming");
 
         Cls cls=new Cls();
-//        cls.setId(1);cls.setClsName("一班");
+        cls.setCid(1);
+        cls.setCname("一班");
 
         return studentDao.getClsByTwoObjParam(cls,student);
     }
 
-    @GetMapping("/insert")
-    public String insert(){
-        Student student=new Student(20,"xiaohu","888888",1);
-        return studentDao.insert(student).toString();
-
+    @GetMapping("/insertStudent")
+    public String insertStudent(){
+        Student student=new Student(20,"xiaohu","888888",1,99);
+        return studentDao.insertStudent(student).toString();
     }
 
 
