@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rjf.mapper.UserMapper">
+
     <resultMap id="BaseResultMap" type="com.rjf.pojo.User" >
         <result column="id" property="id" />
         <result column="name" property="name" />
@@ -13,42 +14,42 @@
         id,name,password
     </sql>
 
-
     <select id="getAll" resultMap="BaseResultMap">
         select
         <include refid="userColums"></include>
-         from mysql_user
+        from user
     </select>
 
-    <select id="findById" resultMap="BaseResultMap">
+    <select id="getById" resultMap="BaseResultMap">
         select
         <include refid="userColums"></include>
-         from mysql_user where id = #{id}
+         from user where id = #{id}
     </select>
 
     <insert id="insert" >
-        insert into mysql_user (name,password)
+        insert into user (name,password)
         values (#{name},#{password})
     </insert>
 
     <update id="update">
-        update mysql_user set
+        update user
+        set
             name=#{name},
             password=#{password}
-        where name=#{name}
+        where id=#{id}
     </update>
 
     <delete id="delete">
-        delete from mysql_user where id=#{id}
+        delete from user where id=#{id}
     </delete>
 
 
 
-  <!--  choose标签 辅助标签wehn otherwise-->
-    <select id="findUserLikeNameAndPassword" resultType="com.rjf.pojo.User">
+  <!--  choose标签 辅助标签when otherwise-->
+    <select id="getUserLikeNameOrPassword" resultType="com.rjf.pojo.User">
         select
         <include refid="userColums"></include>
-        from mysql_user
+        from user
         where 1=1
         <choose>
             <when test="name!=null">
@@ -64,10 +65,10 @@
     </select>
 
     <!--trim标签 辅助标签where set-->
-    <select id="findUserLike" resultMap="BaseResultMap">
+    <select id="getUserLike" resultMap="BaseResultMap">
         select
         <include refid="userColums"></include>
-        from mysql_user
+        from user
         <trim prefix="where" prefixOverrides="and | or">
             <if test="name!=null">
                 and name=#{name}

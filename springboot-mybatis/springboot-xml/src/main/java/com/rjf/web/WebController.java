@@ -3,8 +3,8 @@ package com.rjf.web;
 import com.rjf.mapper.UserMapper;
 import com.rjf.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,54 +15,56 @@ public class WebController {
     @Autowired
     UserMapper userMapper;
 
-    @RequestMapping("/getAll")
+    @GetMapping("/getAll")
     List<User> getAll(){
         return userMapper.getAll();
     }
 
-    @RequestMapping("/findById/{id}")
-    User findById(@PathVariable int id){
-        return userMapper.findById(id);
+
+    @GetMapping("/getById/{id}")
+    User findById(@PathVariable("") int id){
+        return userMapper.getById(id);
     }
 
-    @RequestMapping("/insert/{name}/{password}")
-    int insert(@PathVariable String name,@PathVariable String password){
+    @GetMapping("/insert/{name}/{password}")
+    int insert(@PathVariable("name") String name,@PathVariable("password") String password){
         User user=new User();
         user.setName(name);
         user.setPassword(password);
         return userMapper.insert(user);
     }
 
-    @RequestMapping("/update/{name}/{password}")
-    int update(@PathVariable String name,@PathVariable String password){
+    @GetMapping("/update/{id}/{name}/{password}")
+    int update(@PathVariable("id") Integer id,@PathVariable("name") String name,@PathVariable("password") String password){
         User user=new User();
+        user.setId(id);
         user.setName(name);
         user.setPassword(password);
         return userMapper.update(user);
     }
 
-    @RequestMapping("/delete/{id}")
-    int delete(@PathVariable int id){
+    @GetMapping("/delete/{id}")
+    int delete(@PathVariable("id") int id){
         return userMapper.delete(id);
     }
 
 
     //choose
-    @RequestMapping("/findUserLikeNameAndPassword/{name}/{password}")
-    User findUserLikeNameAndPassword(@PathVariable String name,@PathVariable String password){
+    @GetMapping("/getUserLikeNameOrPassword/{name}/{password}")
+    User getUserLikeNameOrPassword(@PathVariable("name") String name,@PathVariable("password") String password){
         User user=new User();
-        //user.setName(name);
+        user.setName(name);
         user.setPassword(password);
-        return userMapper.findUserLikeNameAndPassword(user);
+        return userMapper.getUserLikeNameOrPassword(user);
     }
 
     //trim
-    @RequestMapping("/findUserLike/{name}/{password}")
-    User findUserLike(@PathVariable String name,@PathVariable String password){
+    @GetMapping("/getUserLike/{name}/{password}")
+    User getUserLike(@PathVariable("name") String name,@PathVariable("password") String password){
         User user=new User();
-       // user.setName(name);
+        user.setName(name);
         user.setPassword(password);
-        return userMapper.findUserLike(user);
+        return userMapper.getUserLike(user);
     }
 
 

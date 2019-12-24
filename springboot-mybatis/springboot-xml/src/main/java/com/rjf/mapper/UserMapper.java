@@ -11,7 +11,7 @@ public interface UserMapper {
 
     List<User> getAll();
 
-    User findById(int id);
+    User getById(int id);
 
     int insert(User user);
 
@@ -20,9 +20,9 @@ public interface UserMapper {
     int delete(int id);
 
     //choose
-    User findUserLikeNameAndPassword(User user);
+    User getUserLikeNameOrPassword(User user);
 
     //trim
-    User findUserLike(User user);
+    User getUserLike(User user);
 
 }
