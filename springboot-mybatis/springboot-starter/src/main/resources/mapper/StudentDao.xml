@@ -4,120 +4,79 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rjf.mapper.StudentDao">
 
-    <select id="getOne" resultType="Student">
-        select  * from student where sid=#{sid}
-    </select>
 
-    <!--聚合对象-->
+    <!--student对象-->
     <resultMap id="Base_Student" type="Student" autoMapping="true">
-        <id column="sid" property="sid" jdbcType="NUMERIC"/>
+        <id column="stu_id" property="stuId" jdbcType="INTEGER"/>
+        <result property="stuName" column="stu_name" jdbcType="VARCHAR"/>
+<!--
         <association  property="cls" javaType="Cls" autoMapping="true">
            <id column="cid" property="cid" jdbcType="NUMERIC"/>
         </association>
+-->
     </resultMap>
 
-    <select id="getStudent" resultMap="Base_Student">
-          select
-            s.sid,
-            s.sname,
-            s.password,
-            s.clsid,
-            c.cid,
-            c.cname,
-            c.monitor
-          from student s
-          left join cls c on s.clsid=c.cid
-          where s.sid=#{sid}
-    </select>
-
-    <!--聚合列表-->
-    <resultMap id="Base_Cls" type="Cls" autoMapping="true">
-       <id column="cid" property="cid" jdbcType="NUMERIC"/>
-        <collection column="id" property="students" javaType="ArrayList" ofType="Student" autoMapping="true">
-            <id column="sid" property="sid" jdbcType="NUMERIC"/>
-        </collection>
-    </resultMap>
-
-    <select id="getClsById" resultMap="Base_Cls" >
-        select
-          c.cid,
-          c.cname,
-          c.monitor,
-          s.sid,
-          s.sname,
-          s.password,
-          s.clsid,
-          s.grade
-        from cls c
-        left join student s on c.cid=s.clsid
-        where c.cid = #{cid}
-    </select>
-
-
-
-  <!--  动态sql-->
-    <select id="getStudentByStudent" resultType="Student">
-        select *
-        from student s
-        <where>
-            <if test="sid !=null">
-                and s.sid=#{sid}
-            </if>
-            <if test="sname !=null">
-                and s.sname=#{sname}
-            </if>
-            <if test="password !=null">
-                and s.password=#{password}
-            </if>
-            <if test="clsId != null">
-                and s.clsId=#{clsId}
-            </if>
-
-        </where>
-    </select>
-
-    <!--@Param传参-->
-    <select id="getStudentByStudentParam" resultType="Student">
-        select *
-        from student s
-        <where>
-            <if test="student.sid !=null">
-                and s.sid=#{student.sid}
-            </if>
-            <if test="student.sname">
-                and s.sname=#{student.sname}
-            </if>
-        </where>
-    </select>
-
-    <!--@Param双对象传参-->
-    <select id="getClsByTwoObjParam" resultMap="Base_Cls">
-        select
-          c.cid,
-          c.cname,
-          s.sid,
-          s.sname,
-          s.password,
-          s.grade,
-          s.clsid
-        from cls c
-        left join student s on c.cid=s.clsid
-        <where>
-            <if test="cls.cid !=null">and c.cid = #{cls.cid} </if>
-            <if test="student.sid !=null">and s.sid=#{student.sid}</if>
-        </where>
-    </select>
-
+    <!--增添-->
     <insert id="insertStudent" >
         insert into student
-        (sname,password,grade,cls_id)
+        (stu_id,stu_name,password,birthday,cls_id)
         values(
-        #{sname},
+        #{stuId},
+        #{stuName},
         #{password},
-        #{clsId},
-        #{grade}
+        #{birthday},
+        #{clsId}
         )
     </insert>
+
+    <!--单查询-->
+    <select id="getStudentById" resultMap="Base_Student">
+        select  * from student where stu_id=#{stuId}
+    </select>
+
+    <!--多查询-->
+    <select id="getStudentByStudent" resultMap="Base_Student">
+        select
+            stu_id,
+            stu_name,
+            password,
+            birthday,
+            cls_id
+        from student s
+        <where>
+            <if test="stuId !=null">
+                and s.stu_id=#{stuId}
+            </if>
+            <if test="stuName !=null">
+                and s.stu_name=#{stuName}
+            </if>
+
+        </where>
+    </select>
+
+    <!--更新-->
+    <update id="updateStudent">
+        update student
+        <set>
+            <if test="stuName != null">
+                stu_name = #{stuName},
+            </if>
+           <if test="password != null">
+               password = #{password},
+            </if>
+
+        </set>
+        where stu_id = #{stuId}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteStudent">
+        delete from student
+        where stu_id in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 
 </mapper>

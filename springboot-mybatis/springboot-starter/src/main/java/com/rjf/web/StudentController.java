@@ -2,11 +2,15 @@ package com.rjf.web;
 
 
 import com.rjf.mapper.StudentDao;
-import com.rjf.pojo.Cls;
+import com.rjf.pojo.BaseResult;
 import com.rjf.pojo.Student;
-import org.apache.ibatis.annotations.Param;
+import com.rjf.pojo.StudentResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 public class StudentController {
@@ -14,51 +18,75 @@ public class StudentController {
     @Autowired
     StudentDao studentDao;
 
-    @GetMapping("/getOne/{sid}")
-    public Student  getOne(@PathVariable("sid") int sid){
-        return studentDao.getOne(sid);
+    @Autowired
+    StudentResult result;
+
+    @PostMapping("/saveOrUpdateStudent")
+    public BaseResult saveOrUpdateStudent(@RequestBody Student student) {
+
+        if (student.getStuId() != null){
+            int count=studentDao.updateStudent(student);
+
+            result.setStatus("success");
+            result.setCode("200");
+            result.setMsg("更新成功 !!!");
+            return result;
+        }else {
+            student.setBirthday(new Date());
+
+            int count = studentDao.insertStudent(student);
+
+            result.setStatus("success");
+            result.setCode("200");
+            result.setMsg("插入成功 !!!");
+            return result;
+        }
+
     }
 
-    @GetMapping("/getStudent/{sid}")
-    public Student getStudent(@PathVariable("sid") int sid){
-        return studentDao.getStudent(sid);
-    }
+    @GetMapping("/getStudentById")
+    public StudentResult getStudentById(@RequestBody Student student){
 
-    @GetMapping("/getClsById/{cid}")
-    public Cls getClsById(@PathVariable("cid") int cid){
-        return studentDao.getClsById(cid);
+        List<Student> studentList=new ArrayList<>();
+
+        studentList.add(studentDao.getStudentById(student));
+
+        result.setStatus("success");
+        result.setCode("200");
+        result.setMsg("单查询");
+        result.setStudentList(studentList);
+        return result;
+
     }
 
     @PostMapping("/getStudentByStudent")
-    public Student getStudentByStudent(@RequestBody Student student){
-        return studentDao.getStudentByStudent(student);
+    public StudentResult getStudentByStudent(@RequestBody Student student){
+        List<Student> studentList=new ArrayList<>();
+
+        studentList=studentDao.getStudentByStudent(student);
+
+
+        result.setStatus("success");
+        result.setCode("200");
+        result.setMsg("多查询");
+        result.setStudentList(studentList);
+        return result;
+
     }
 
-    @PostMapping("/getStudentByStudentParam")
-    public Student getStudentByStudentParam(@RequestBody Student student){
+    @PostMapping("/deleteStudent")
+    public StudentResult deleteStudent(@RequestBody List<Integer> ids){
 
-        return studentDao.getStudentByStudentParam(student);
+        int count=studentDao.deleteStudent(ids);
+
+
+        result.setStatus("success");
+        result.setCode("200");
+        result.setMsg("删除 "+count+" 条");
+        return result;
     }
 
-    @GetMapping("/getClsByTwoObjParam")
-    public Cls getClsByTwoObjParam(){
 
-        Student student=new Student();
-        student.setSid(1);
-        student.setSname("xiaoming");
-
-        Cls cls=new Cls();
-        cls.setCid(1);
-        cls.setCname("一班");
-
-        return studentDao.getClsByTwoObjParam(cls,student);
-    }
-
-    @GetMapping("/insertStudent")
-    public String insertStudent(){
-        Student student=new Student(null,"xiaohu","888888",1,99);
-        return studentDao.insertStudent(student).toString();
-    }
 
 
 

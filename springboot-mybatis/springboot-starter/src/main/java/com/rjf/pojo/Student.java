@@ -1,41 +1,42 @@
 package com.rjf.pojo;
 
+import java.util.Date;
+
 public class Student {
 
-    private Integer sid;
-    private String sname;
+    private Integer stuId;
+    private String stuName;
     private String password;
-    private Integer clsId;
-    private Integer grade;
+    private Date birthday;
 
-    private Cls cls;
+    //逻辑外键
+    private Integer clsId;
 
     public Student() {
     }
 
-    public Student(Integer sid, String sname, String password, Integer clsId, Integer grade ) {
-        this.sid = sid;
-        this.sname = sname;
+    public Student(Integer stuId, String stuName, String password, Date birthday, Integer clsId) {
+        this.stuId = stuId;
+        this.stuName = stuName;
         this.password = password;
+        this.birthday = birthday;
         this.clsId = clsId;
-        this.grade = grade;
-
     }
 
-    public Integer getSid() {
-        return sid;
+    public Integer getStuId() {
+        return stuId;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setStuId(Integer stuId) {
+        this.stuId = stuId;
     }
 
-    public String getSname() {
-        return sname;
+    public String getStuName() {
+        return stuName;
     }
 
-    public void setSname(String sname) {
-        this.sname = sname;
+    public void setStuName(String stuName) {
+        this.stuName = stuName;
     }
 
     public String getPassword() {
@@ -46,6 +47,14 @@ public class Student {
         this.password = password;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public Integer getClsId() {
         return clsId;
     }
@@ -54,31 +63,14 @@ public class Student {
         this.clsId = clsId;
     }
 
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
-
-    public Cls getCls() {
-        return cls;
-    }
-
-    public void setCls(Cls cls) {
-        this.cls = cls;
-    }
-
     @Override
     public String toString() {
         return "Student{" +
-                "sid=" + sid +
-                ", sname='" + sname + '\'' +
+                "stuId=" + stuId +
+                ", stuName='" + stuName + '\'' +
                 ", password='" + password + '\'' +
+                ", birthday=" + birthday +
                 ", clsId=" + clsId +
-                ", grade=" + grade +
-                ", cls=" + cls +
                 '}';
     }
 }

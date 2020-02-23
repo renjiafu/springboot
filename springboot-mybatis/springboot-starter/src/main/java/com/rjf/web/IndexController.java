@@ -9,7 +9,7 @@ public class IndexController {
 
         @GetMapping("/")
         public String index(){
-            return "<html><button>index</button></html>";
+            return "<html><h1>您好 !<h/></html>";
         }
 
 }
