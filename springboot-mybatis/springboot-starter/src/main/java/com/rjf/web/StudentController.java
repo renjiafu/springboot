@@ -56,7 +56,7 @@ public class StudentController {
 
     @GetMapping("/insertStudent")
     public String insertStudent(){
-        Student student=new Student(20,"xiaohu","888888",1,99);
+        Student student=new Student(null,"xiaohu","888888",1,99);
         return studentDao.insertStudent(student).toString();
     }
 

@@ -110,7 +110,7 @@
 
     <insert id="insertStudent" >
         insert into student
-        (sname,password,clsid,grade)
+        (sname,password,grade,cls_id)
         values(
         #{sname},
         #{password},

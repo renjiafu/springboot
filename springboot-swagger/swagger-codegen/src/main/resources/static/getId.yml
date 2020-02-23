@@ -1,0 +1,29 @@
+get:
+  tags:
+    - test
+  summary: 测试
+  description: 测试
+  operationId: testMethod
+  parameters:
+    - name: name
+      in: query
+      description: 姓名
+      required: true
+      type: string
+  responses:
+    200:
+      description: 查询成功
+      schema:
+        $ref: "../../ltci-agency-person-api-v1.yml/#/definitions/ResultDTO"
+    default:
+      description: 其他错误
+      schema:
+        $ref: "../../ltci-agency-person-api-v1.yml/#/definitions/ResultDTO"
+
+
+
+
+
+
+
+
