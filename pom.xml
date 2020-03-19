@@ -12,20 +12,10 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <modules>
         <module>springboot-mybatis</module>
-        <module>springboot-redis</module>
-        <module>springboot-webflux</module>
-        <module>springboot-elasticsearch</module>
-        <module>springboot-swagger</module>
-        <module>springboot-jpa</module>
-        <module>springboot-netty</module>
     </modules>
-
 
 </project>
