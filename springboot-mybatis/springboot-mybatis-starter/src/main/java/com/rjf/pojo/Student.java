@@ -4,31 +4,26 @@ import java.util.Date;
 
 public class Student {
 
-    private Integer stuId;
+    private Integer id;
     private String stuName;
-    private String password;
-    private Date birthday;
+    private Integer stuAge;
 
-    //逻辑外键
-    private Integer clsId;
 
     public Student() {
     }
 
-    public Student(Integer stuId, String stuName, String password, Date birthday, Integer clsId) {
-        this.stuId = stuId;
+    public Student(Integer id, String stuName, Integer stuAge) {
+        this.id = id;
         this.stuName = stuName;
-        this.password = password;
-        this.birthday = birthday;
-        this.clsId = clsId;
+        this.stuAge = stuAge;
     }
 
-    public Integer getStuId() {
-        return stuId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setStuId(Integer stuId) {
-        this.stuId = stuId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getStuName() {
@@ -39,38 +34,20 @@ public class Student {
         this.stuName = stuName;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getStuAge() {
+        return stuAge;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Integer getClsId() {
-        return clsId;
-    }
-
-    public void setClsId(Integer clsId) {
-        this.clsId = clsId;
+    public void setStuAge(Integer stuAge) {
+        this.stuAge = stuAge;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "stuId=" + stuId +
+                "id=" + id +
                 ", stuName='" + stuName + '\'' +
-                ", password='" + password + '\'' +
-                ", birthday=" + birthday +
-                ", clsId=" + clsId +
+                ", stuAge=" + stuAge +
                 '}';
     }
 }

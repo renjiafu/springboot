@@ -20,6 +20,7 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -27,7 +28,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!--mybatis-->
@@ -44,6 +44,7 @@
             <version>8.0.18</version>
             <scope>compile</scope>
         </dependency>
+
 
 
     </dependencies>

@@ -7,9 +7,9 @@
 
     <!--student对象-->
     <resultMap id="Base_Student" type="Student" autoMapping="true">
-        <id column="stu_id" property="stuId" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="INTEGER"/>
         <result property="stuName" column="stu_name" jdbcType="VARCHAR"/>
-        <result property="clsId" column="cls_id" jdbcType="INTEGER"/>
+        <result property="stuAge" column="stu_age" jdbcType="INTEGER"/>
 <!--
         <association  property="cls" javaType="Cls" autoMapping="true">
            <id column="cid" property="cid" jdbcType="NUMERIC"/>
@@ -20,21 +20,19 @@
 
     <!--单查询-->
     <select id="getStudentById" resultMap="Base_Student">
-        select  * from student where stu_id=#{stuId}
+        select  * from student where id=#{id}
     </select>
 
     <!--多查询-->
     <select id="getStudentByStudent" resultMap="Base_Student">
         select
-            stu_id,
+            id,
             stu_name,
-            password,
-            birthday,
-            cls_id
+            stu_age
         from student s
         <where>
-            <if test="stuId !=null">
-                and s.stu_id=#{stuId}
+            <if test="id !=null">
+                and s.id=#{id}
             </if>
             <if test="stuName !=null">
                 and s.stu_name=#{stuName}
@@ -51,13 +49,11 @@
     <!--增添-->
     <insert id="insertStudent" >
         insert into student
-        (stu_id,stu_name,password,birthday,cls_id)
+        (id,stu_name,stu_age)
         values(
-        #{stuId},
+        #{id},
         #{stuName},
-        #{password},
-        #{birthday},
-        #{clsId}
+        #{stuAge}
         )
     </insert>
 
@@ -68,18 +64,14 @@
             <if test="stuName != null">
                 stu_name = #{stuName},
             </if>
-           <if test="password != null">
-               password = #{password},
-            </if>
-
         </set>
-        where stu_id = #{stuId}
+        where id = #{id}
     </update>
 
     <!--删除-->
     <delete id="deleteStudent">
         delete from student
-        where stu_id in
+        where id in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
         </foreach>

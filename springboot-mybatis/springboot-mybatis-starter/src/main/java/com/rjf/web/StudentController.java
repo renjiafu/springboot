@@ -2,7 +2,7 @@ package com.rjf.web;
 
 
 import com.rjf.mapper.StudentDao;
-import com.rjf.pojo.BaseResult;
+import com.rjf.common.BaseResult;
 import com.rjf.pojo.Student;
 import com.rjf.pojo.StudentResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class StudentController {
     @PostMapping("/saveOrUpdateStudent")
     public BaseResult saveOrUpdateStudent(@RequestBody Student student) {
 
-        if (student.getStuId() != null){
+        if (student.getId() != null){
             int count=studentDao.updateStudent(student);
 
             result.setStatus("success");
@@ -33,8 +33,6 @@ public class StudentController {
             result.setMsg("更新成功 !!!");
             return result;
         }else {
-            student.setBirthday(new Date());
-
             int count = studentDao.insertStudent(student);
 
             result.setStatus("success");
@@ -87,15 +85,10 @@ public class StudentController {
 
         int count=studentDao.deleteStudent(ids);
 
-
         result.setStatus("success");
         result.setCode("200");
         result.setMsg("删除 "+count+" 条");
         return result;
     }
-
-
-
-
 
 }

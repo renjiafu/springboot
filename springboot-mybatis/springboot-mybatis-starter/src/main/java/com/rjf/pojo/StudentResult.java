@@ -1,5 +1,6 @@
 package com.rjf.pojo;
 
+import com.rjf.common.BaseResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

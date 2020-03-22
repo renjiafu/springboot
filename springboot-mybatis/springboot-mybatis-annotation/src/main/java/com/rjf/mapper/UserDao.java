@@ -2,11 +2,13 @@ package com.rjf.mapper;
 
 import com.rjf.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 @Mapper
-public interface UserMapper {
+public interface UserDao {
 
     @Select("select * from user")
     @Results({
@@ -22,7 +24,7 @@ public interface UserMapper {
             @Result(column = "name",property = "name",javaType = String.class),
             @Result(column = "password",property = "password",javaType =String.class )
     })
-    User getOne(int id);
+    User getUser(int id);
 
     @Insert("insert into user(name,password) values (#{name},#{password})")
     int insert(User user);

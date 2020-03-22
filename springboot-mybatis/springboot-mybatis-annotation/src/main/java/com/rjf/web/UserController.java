@@ -1,7 +1,7 @@
 package com.rjf.web;
 
 
-import com.rjf.mapper.UserMapper;
+import com.rjf.mapper.UserDao;
 import com.rjf.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +14,16 @@ import java.util.List;
 public class UserController {
 
    @Autowired
-   private UserMapper userMapper;
+   private UserDao userDao;
 
     @GetMapping(value = "/getAll")
     public List<User> getAll(){
-        return userMapper.getAll();
+        return userDao.getAll();
     }
 
     @GetMapping(value = "/getOne/{id}")
     public User getOne(@PathVariable("id") int id){
-        return userMapper.getOne(id);
+        return userDao.getOne(id);
     }
 
     @GetMapping("/insert/{name}/{password}")
@@ -31,7 +31,7 @@ public class UserController {
         User user=new User();
         user.setName(name);
         user.setPassword(password);
-        return userMapper.insert(user);
+        return userDao.insert(user);
     }
 
     @GetMapping("/update/{id}/{name}/{password}")
@@ -40,12 +40,12 @@ public class UserController {
         user.setId(id);
         user.setName(name);
         user.setPassword(password);
-        return userMapper.update(user);
+        return userDao.update(user);
     }
 
    @GetMapping("/delete/{id}")
     public int delete(@PathVariable int id){
-        return userMapper.delete(id);
+        return userDao.delete(id);
    }
 
 }
