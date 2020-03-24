@@ -1,6 +1,4 @@
-package com.rjf.pojo;
-
-import java.util.Date;
+package com.rjf.mybatis.quickstart.pojo;
 
 public class Student {
 

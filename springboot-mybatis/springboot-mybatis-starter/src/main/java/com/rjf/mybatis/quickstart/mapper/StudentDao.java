@@ -1,6 +1,6 @@
-package com.rjf.mapper;
+package com.rjf.mybatis.quickstart.mapper;
 
-import com.rjf.pojo.Student;
+import com.rjf.mybatis.quickstart.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
-package com.rjf.web;
+package com.rjf.mybatis.xml.web;
 
-import com.rjf.mapper.UserMapper;
-import com.rjf.pojo.User;
+import com.rjf.mybatis.xml.mapper.UserMapper;
+import com.rjf.mybatis.xml.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

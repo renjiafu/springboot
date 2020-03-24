@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rjf.mapper.UserMapper">
+<mapper namespace="com.rjf.mybatis.xml.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.rjf.pojo.User" >
+    <resultMap id="BaseResultMap" type="User" >
         <result column="id" property="id" />
         <result column="name" property="name" />
         <result column="password" property="password" />
@@ -46,7 +46,7 @@
 
 
   <!--  choose标签 辅助标签when otherwise-->
-    <select id="getUserLikeNameOrPassword" resultType="com.rjf.pojo.User">
+    <select id="getUserLikeNameOrPassword" resultType="User">
         select
         <include refid="userColums"></include>
         from user

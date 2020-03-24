@@ -1,15 +1,14 @@
-package com.rjf.web;
+package com.rjf.mybatis.quickstart.web;
 
 
-import com.rjf.mapper.StudentDao;
-import com.rjf.common.BaseResult;
-import com.rjf.pojo.Student;
-import com.rjf.pojo.StudentResult;
+import com.rjf.mybatis.quickstart.mapper.StudentDao;
+import com.rjf.mybatis.quickstart.common.BaseResult;
+import com.rjf.mybatis.quickstart.pojo.Student;
+import com.rjf.mybatis.quickstart.pojo.StudentResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)

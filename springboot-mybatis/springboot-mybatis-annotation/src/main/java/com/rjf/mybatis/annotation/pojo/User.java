@@ -1,10 +1,11 @@
-package com.rjf.pojo;
+package com.rjf.mybatis.annotation.pojo;
 
 public class User {
-
-    private int id;
+    private Integer id;
     private String name;
     private String password;
+
+
 
     public int getId() {
         return id;

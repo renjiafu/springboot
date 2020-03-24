@@ -1,6 +1,6 @@
-package com.rjf.mapper;
+package com.rjf.mybatis.xml.mapper;
 
-import com.rjf.pojo.User;
+import com.rjf.mybatis.xml.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

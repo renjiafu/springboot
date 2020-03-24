@@ -1,6 +1,6 @@
-package com.rjf.pojo;
+package com.rjf.mybatis.quickstart.pojo;
 
-import com.rjf.common.BaseResult;
+import com.rjf.mybatis.quickstart.common.BaseResult;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

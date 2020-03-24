@@ -1,4 +1,4 @@
-package com.rjf.config;
+package com.rjf.mybatis.quickstart.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
