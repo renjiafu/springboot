@@ -16,6 +16,7 @@
 
     <modules>
         <module>springboot-mybatis</module>
+        <module>springboot-aop</module>
     </modules>
 
 </project>
