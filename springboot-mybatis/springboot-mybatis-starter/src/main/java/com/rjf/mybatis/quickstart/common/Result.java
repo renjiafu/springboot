@@ -3,11 +3,12 @@ package com.rjf.mybatis.quickstart.common;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BaseResult {
+public class Result<T> {
 
     private String status;
     private String code;
     private String msg;
+    private T date;
 
     public String getStatus() {
         return status;
@@ -33,12 +34,21 @@ public class BaseResult {
         this.msg = msg;
     }
 
+    public T getDate() {
+        return date;
+    }
+
+    public void setDate(T date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
-        return "Result{" +
+        return "BaseResult{" +
                 "status='" + status + '\'' +
                 ", code='" + code + '\'' +
                 ", msg='" + msg + '\'' +
+                ", date=" + date +
                 '}';
     }
 }

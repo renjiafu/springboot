@@ -2,7 +2,7 @@ package com.rjf.mybatis.quickstart.web;
 
 
 import com.rjf.mybatis.quickstart.mapper.StudentDao;
-import com.rjf.mybatis.quickstart.common.BaseResult;
+import com.rjf.mybatis.quickstart.common.Result;
 import com.rjf.mybatis.quickstart.pojo.Student;
 import com.rjf.mybatis.quickstart.pojo.StudentResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class StudentController {
     StudentResult result;
 
     @PostMapping("/saveOrUpdateStudent")
-    public BaseResult saveOrUpdateStudent(@RequestBody Student student) {
+    public Result saveOrUpdateStudent(@RequestBody Student student) {
 
         if (student.getId() != null){
             int count=studentDao.updateStudent(student);
