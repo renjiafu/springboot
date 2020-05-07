@@ -4,7 +4,6 @@ package com.rjf.mybatis.quickstart.web;
 import com.rjf.mybatis.quickstart.mapper.StudentDao;
 import com.rjf.mybatis.quickstart.common.Result;
 import com.rjf.mybatis.quickstart.pojo.Student;
-import com.rjf.mybatis.quickstart.pojo.StudentResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ public class StudentController {
     StudentDao studentDao;
 
     @Autowired
-    StudentResult result;
+    Result result;
 
     @PostMapping("/saveOrUpdateStudent")
     public Result saveOrUpdateStudent(@RequestBody Student student) {
@@ -43,7 +42,7 @@ public class StudentController {
     }
 
     @GetMapping("/getStudentById")
-    public StudentResult getStudentById(@RequestBody Student student){
+    public Result getStudentById(@RequestBody Student student){
 
         List<Student> studentList=new ArrayList<>();
 
@@ -52,13 +51,13 @@ public class StudentController {
         result.setStatus("success");
         result.setCode("200");
         result.setMsg("单查询");
-        result.setStudentList(studentList);
+        result.setDate(studentList);
         return result;
 
     }
 
     @PostMapping("/getStudentByStudent")
-    public StudentResult getStudentByStudent(@RequestBody Student student){
+    public Result getStudentByStudent(@RequestBody Student student){
         List<Student> studentList=new ArrayList<>();
 
         studentList=studentDao.getStudentByStudent(student);
@@ -66,7 +65,7 @@ public class StudentController {
         result.setStatus("success");
         result.setCode("200");
         result.setMsg("多查询");
-        result.setStudentList(studentList);
+        result.setDate(studentList);
         return result;
 
     }
@@ -80,7 +79,7 @@ public class StudentController {
     }
 
     @PostMapping("/deleteStudent")
-    public StudentResult deleteStudent(@RequestBody List<Integer> ids){
+    public Result deleteStudent(@RequestBody List<Integer> ids){
 
         int count=studentDao.deleteStudent(ids);
 
