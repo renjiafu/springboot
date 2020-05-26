@@ -28,11 +28,11 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
-        if (httpServletRequest.getHeader("account").equals("666666") || httpServletRequest.getHeader("account") == null) {
-            logger.info("权限过滤 account : "+httpServletRequest.getHeader("account"));
+        if ("666666".equals(httpServletRequest.getHeader("account")) || null == httpServletRequest.getHeader("account")) {
+            logger.info("权限过滤器 account : " + httpServletRequest.getHeader("account"));
         }
 
-        chain.doFilter(request,response);
+        chain.doFilter(request, response);
     }
 
     @Override
