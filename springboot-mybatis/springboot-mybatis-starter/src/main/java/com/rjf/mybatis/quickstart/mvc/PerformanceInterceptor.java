@@ -19,10 +19,19 @@ public class PerformanceInterceptor implements HandlerInterceptor {
 
     private static final Logger logger = LoggerFactory.getLogger(PerformanceInterceptor.class);
 
+    private Long startTime;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        logger.info("性能拦截器 !");
+        logger.info("性能拦截器 A!");
+        logger.info("URL : "+request.getRequestURI());
+        startTime = System.currentTimeMillis();
         return  true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        logger.info("性能拦截器 B!");
+        logger.info("消耗时间 : "+(System.currentTimeMillis()-startTime));
     }
 }
