@@ -1,4 +1,4 @@
-package com.rjf.mybatis.quickstart.web;
+package com.rjf.mybatis.start.web;
 
 /*
  *

@@ -1,4 +1,4 @@
-package com.rjf.mybatis.quickstart.common;
+package com.rjf.mybatis.start.common;
 
 import org.springframework.stereotype.Component;
 

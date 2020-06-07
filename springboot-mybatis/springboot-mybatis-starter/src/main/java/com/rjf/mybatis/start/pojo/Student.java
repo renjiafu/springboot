@@ -1,4 +1,4 @@
-package com.rjf.mybatis.quickstart.pojo;
+package com.rjf.mybatis.start.pojo;
 
 public class Student {
 

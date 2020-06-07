@@ -1,4 +1,4 @@
-package com.rjf.mybatis.quickstart.constans;
+package com.rjf.mybatis.start.constans;
 
 /*
  *

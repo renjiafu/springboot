@@ -1,4 +1,4 @@
-package com.rjf.mybatis.quickstart;
+package com.rjf.mybatis.start;
 
 
 import org.springframework.boot.SpringApplication;

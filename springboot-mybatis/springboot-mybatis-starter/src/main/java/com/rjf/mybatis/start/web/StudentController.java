@@ -1,9 +1,9 @@
-package com.rjf.mybatis.quickstart.web;
+package com.rjf.mybatis.start.web;
 
 
-import com.rjf.mybatis.quickstart.mapper.StudentDao;
-import com.rjf.mybatis.quickstart.common.Result;
-import com.rjf.mybatis.quickstart.pojo.Student;
+import com.rjf.mybatis.start.mapper.StudentDao;
+import com.rjf.mybatis.start.common.Result;
+import com.rjf.mybatis.start.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

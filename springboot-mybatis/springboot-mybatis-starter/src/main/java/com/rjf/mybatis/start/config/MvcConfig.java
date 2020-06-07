@@ -1,7 +1,6 @@
-package com.rjf.mybatis.quickstart.config;
+package com.rjf.mybatis.start.config;
 
-import com.rjf.mybatis.quickstart.mvc.OnlineListener;
-import com.rjf.mybatis.quickstart.mvc.PerformanceInterceptor;
+import com.rjf.mybatis.start.mvc.PerformanceInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
