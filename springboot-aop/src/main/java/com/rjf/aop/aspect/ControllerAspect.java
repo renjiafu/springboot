@@ -1,16 +1,17 @@
 package com.rjf.aop.aspect;
 
 import com.rjf.aop.web.AopController;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
+@Component
 @Aspect
-@Service
-public class AopControllerAspect {
+public class ControllerAspect {
 
     static Logger logger = LoggerFactory.getLogger(AopController.class);
 
@@ -19,9 +20,11 @@ public class AopControllerAspect {
     }
 
     @Around("aopControllerAspect()")
-    public void around(){
+    public void around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
         logger.warn("环绕通知 !!!");
 
+        proceedingJoinPoint.proceed();
     }
 
 
