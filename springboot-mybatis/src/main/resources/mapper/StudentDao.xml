@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rjf.mybatis.dao.StudentDao">
+
+
+    <!--student对象-->
+    <resultMap id="Base_Student" type="Student" autoMapping="true">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result property="stuName" column="stu_name" jdbcType="VARCHAR"/>
+        <result property="stuAge" column="stu_age" jdbcType="INTEGER"/>
+<!--
+        <association  property="cls" javaType="Cls" autoMapping="true">
+           <id column="cid" property="cid" jdbcType="NUMERIC"/>
+        </association>
+-->
+    </resultMap>
+
+
+    <!--单查询-->
+    <select id="getStudentById" resultMap="Base_Student">
+        select  * from student where id=#{id}
+    </select>
+
+    <!--多查询-->
+    <select id="getStudentByStudent" resultMap="Base_Student">
+        select
+            id,
+            stu_name,
+            stu_age
+        from student s
+        <where>
+            <if test="id !=null">
+                and s.id=#{id}
+            </if>
+            <if test="stuName !=null">
+                and s.stu_name=#{stuName}
+            </if>
+
+        </where>
+    </select>
+
+    <!--列表查询-->
+    <select id="getStudentList" resultMap="Base_Student">
+        select * from student limit #{index},#{pageSize}
+    </select>
+
+    <!--增添-->
+    <insert id="insertStudent" >
+        insert into student
+        (id,stu_name,stu_age)
+        values(
+        #{id},
+        #{stuName},
+        #{stuAge}
+        )
+    </insert>
+
+    <!--更新-->
+    <update id="updateStudent">
+        update student
+        <set>
+            <if test="stuName != null">
+                stu_name = #{stuName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteStudent">
+        delete from student
+        where id in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+</mapper>
