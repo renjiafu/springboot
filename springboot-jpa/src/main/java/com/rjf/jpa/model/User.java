@@ -1,4 +1,4 @@
-package com.rjf.model;
+package com.rjf.jpa.model;
 
 /*
  *

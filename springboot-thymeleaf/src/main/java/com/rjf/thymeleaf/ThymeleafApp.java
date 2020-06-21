@@ -1,4 +1,4 @@
-package com.rjf;
+package com.rjf.thymeleaf;
 
 /*
  *
@@ -10,9 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JpaApp {
+public class ThymeleafApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(JpaApp.class);
+        SpringApplication.run(ThymeleafApp.class);
     }
 }

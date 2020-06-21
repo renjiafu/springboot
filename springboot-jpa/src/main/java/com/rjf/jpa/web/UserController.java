@@ -1,7 +1,7 @@
-package com.rjf.web;
+package com.rjf.jpa.web;
 
-import com.rjf.dao.UserDao;
-import com.rjf.model.User;
+import com.rjf.jpa.dao.UserDao;
+import com.rjf.jpa.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

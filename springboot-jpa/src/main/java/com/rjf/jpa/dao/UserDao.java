@@ -1,6 +1,6 @@
-package com.rjf.dao;
+package com.rjf.jpa.dao;
 
-import com.rjf.model.User;
+import com.rjf.jpa.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
