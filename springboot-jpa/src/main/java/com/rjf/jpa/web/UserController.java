@@ -3,6 +3,7 @@ package com.rjf.jpa.web;
 import com.rjf.jpa.dao.UserDao;
 import com.rjf.jpa.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,5 +37,11 @@ public class UserController {
     public List<User> findByNameLike(@PathVariable("name") String name){
 
         return userDao.findByNameLike(name);
+    }
+
+    @GetMapping("/findByCreatedDateAfter")
+    public List<User> findByCreatedDateAfter(@Param("createdDate") String createdDate){
+
+        return userDao.findByCreatedDateAfter(createdDate);
     }
 }

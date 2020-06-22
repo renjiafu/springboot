@@ -15,4 +15,6 @@ import java.util.List;
 public interface UserDao extends JpaRepository<User,Integer> {
 
     List<User> findByNameLike(String name);
+
+    List<User> findByCreatedDateAfter(String createdDate);
 }
