@@ -20,6 +20,7 @@
         <module>springboot-netty</module>
         <module>springboot-jpa</module>
         <module>springboot-thymeleaf</module>
+        <module>springboot-es</module>
     </modules>
 
 </project>
