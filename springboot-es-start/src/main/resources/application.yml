@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: springboot-es-start
+  elasticsearch:
+    rest:
+      uris: docker:9200

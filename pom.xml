@@ -21,6 +21,7 @@
         <module>springboot-jpa</module>
         <module>springboot-thymeleaf</module>
         <module>springboot-es</module>
+        <module>springboot-es-start</module>
     </modules>
 
 </project>
