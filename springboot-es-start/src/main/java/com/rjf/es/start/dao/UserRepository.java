@@ -7,19 +7,24 @@ package com.rjf.es.start.dao;
  */
 
 import com.rjf.es.start.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface UserRepository extends ElasticsearchRepository<User,Integer> {
 
-    @Override
-    Optional<User> findById(Integer i);
 
-    Iterable<User> findByName(String name);
+//    @Query("{\"bool\" : {\"must\" : {\"field\" : {\"firstCode.keyword\" : \"?\"}}}}")
+    Page<User> findById(String id, Pageable pageable);
 
-    List<User> findByHobby(String s1, String s2);
+//    @Query("{\"bool\" : {\"must\" : {\"field\" : {\"secordCode.keyword\" : \"?\"}}}}")
+    Page<User> findByName(String name, Pageable pageable);
+
+//    @Query("{\"bool\" : {\"must\" : {\"field\" : {\"content\" : \"?\"}}}}")
+    Page<User> findByHobby(String hobby, Pageable pageable);
+
+
 }

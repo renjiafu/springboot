@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
@@ -26,7 +26,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /*
  *
@@ -42,6 +41,8 @@ public class ElasticSearchTest {
 
     @Autowired
     UserRepository userRepository;
+
+    private Pageable pageable = PageRequest.of(0,10);
 
     @Test
     public void addIndexTest(){
@@ -93,50 +94,37 @@ public class ElasticSearchTest {
      * 查询全部
      */
     @Test
-    public void find() {
+    public void findAll() {
 
-        System.out.println("users ---> " + userRepository.findById(1));
-    }
-
-
-    /**
-     * 查询并排序
-     */
-    @Test
-    public void findAllSort() {
-        Iterable<User> Users = userRepository.findAll(Sort.by("name").descending());
-
-        Users.forEach(System.out::println);
+        System.out.println("users ---> " + userRepository.findAll());
     }
 
 
     @Test
     public void findByHobby() {
-        Iterable<User> Users = this.userRepository.findByHobby("电影","游戏");
+        Iterable<User> Users = this.userRepository.findByHobby("电影",pageable);
         Users.forEach(System.out::println);
     }
 
 
-
-
     /**
-     * 通过标题查询
+     * 通过姓名查询
      */
     @Test
-    public void testSearch() {
+    public void searchByName() {
         // 通过查询构建器构建查询条件
-        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("title", "手机");
+        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name", "xiao");
         //执行查询
         Iterable<User> Users = this.userRepository.search(matchQueryBuilder);
         Users.forEach(System.out::println);
     }
 
     @Test
-    public void testNative() {
+    public void searchSelfDefine() {
         //构建自定义查询构建器
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         //添加基本的查询条件
-        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("title", "手机");
+        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name", "xiao");
         //执行查询获取分页结果集
         nativeSearchQueryBuilder.withQuery(matchQueryBuilder);
 
@@ -151,7 +139,6 @@ public class ElasticSearchTest {
     /**
      * 分页查询
      */
-
     @Test
     public void testNativeQuery() {
         // 构建查询条件
