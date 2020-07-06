@@ -61,57 +61,18 @@ public class ElasticSearchTest {
     public void create() {
 
         /*新增*/
-//        User User = new User(1L, "小米手机7", " 手机", "小米", 3499.00, "http://image.leyou.com/13123.jpg");
-//        this.userRepository.save(User);
+        User User = new User(1,"xiaoming","打球 电影 java开发 前端开发");
+        userRepository.save(User);
 
-        List<User> list = new ArrayList<>();
-        list.add(new User(1,"xiaoming","打球 电影 java开发 前端开发"));
-        list.add(new User(2,"xiaoming","打球 电影 java开发 前端开发"));
-        // 接收对象集合，实现批量新增
-        this.userRepository.saveAll(list);
+        /*
+
+                List<User> list = new ArrayList<>();
+                list.add(new User(1,"xiaoming","打球 电影 java开发 前端开发"));
+                list.add(new User(2,"xiaoming","打球 电影 java开发 前端开发"));
+                // 接收对象集合，实现批量新增
+                userRepository.saveAll(list);
+        */
     }
-
-
-    /**
-     * 查询全部
-     */
-    @Test
-    public void find() {
-        Optional<User> User = this.userRepository.findById(1);
-        System.out.println("User.get() = " + User.get());
-    }
-
-
-    /**
-     * 查询并排序
-     */
-    @Test
-    public void findAllSort() {
-        Iterable<User> Users = this.userRepository.findAll(Sort.by("price").descending());
-
-        Users.forEach(System.out::println);
-    }
-
-
-    /**
-     * 根据title查询
-     */
-    @Test
-    public void findByTitle() {
-        Iterable<User> Users = this.userRepository.findByName("手机");
-        Users.forEach(System.out::println);
-    }
-
-
-    /**
-     * 查询价格区间
-     */
-    @Test
-    public void findByPrice() {
-        List<User> byPriceBetween = this.userRepository.findByHobby("篮球","开发");
-        byPriceBetween.forEach(System.out::println);
-    }
-
 
     /**
      * 添加测试数据
@@ -127,6 +88,36 @@ public class ElasticSearchTest {
         // 接收对象集合，实现批量新增
         userRepository.saveAll(list);
     }
+
+    /**
+     * 查询全部
+     */
+    @Test
+    public void find() {
+
+        System.out.println("users ---> " + userRepository.findById(1));
+    }
+
+
+    /**
+     * 查询并排序
+     */
+    @Test
+    public void findAllSort() {
+        Iterable<User> Users = userRepository.findAll(Sort.by("name").descending());
+
+        Users.forEach(System.out::println);
+    }
+
+
+    @Test
+    public void findByHobby() {
+        Iterable<User> Users = this.userRepository.findByHobby("电影","游戏");
+        Users.forEach(System.out::println);
+    }
+
+
+
 
     /**
      * 通过标题查询

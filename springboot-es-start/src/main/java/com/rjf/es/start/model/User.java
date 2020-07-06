@@ -4,19 +4,27 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
+import java.io.Serializable;
+
 /*
  *
  *   Rene
  *   2020/7/6 23:21
  */
-@Document(indexName = "index001")
-public class User {
+@Document(indexName = "index001", type = "_doc")
+public class User implements Serializable {
 
     @Id
     private Integer id;
-    @Field(analyzer = "ik_max_word",searchAnalyzer = "ik_smart_word")
+
+    /*
+     *   姓名
+     * */
     private String name;
-    @Field(analyzer = "ik_max_word",searchAnalyzer = "ik_smart_word")
+
+    /*
+     *   爱好
+     * */
     private String hobby;
 
     public User(Integer id, String name, String hobby) {
