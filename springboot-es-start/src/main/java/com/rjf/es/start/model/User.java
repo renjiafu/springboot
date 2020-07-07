@@ -12,7 +12,7 @@ import java.io.Serializable;
  *   Rene
  *   2020/7/6 23:21
  */
-@Document(indexName = "index001", type = "_doc", shards = 2, replicas = 0)
+@Document(indexName = "index001", shards = 1, replicas = 0)
 public class User implements Serializable {
 
     @Id
@@ -29,6 +29,10 @@ public class User implements Serializable {
      * */
     @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart")
     private String hobby;
+
+    // 这里无参构造必须保留,否则反序列化会失败
+    public User() {
+    }
 
     public User(Integer id, String name, String hobby) {
         this.id = id;
