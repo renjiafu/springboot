@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /*
  *
@@ -78,11 +79,25 @@ public class ElasticSearchTest {
     }
 
 
+    // id查询
+    @Test
+    public void searchById(){
+        Optional<User> user = userRepository.findById(1);
+        user.ifPresent(System.out::println);
+    }
+
+    // 姓名查询
+    @Test
+    public void searchByName01(){
+        Page<User> user = userRepository.findByName("xiaoming",PageRequest.of(1, 10));
+        user.forEach(System.out::println);
+    }
+
     /**
      * 通过姓名查询
      */
     @Test
-    public void searchByName() {
+    public void searchByName02() {
         // 通过查询构建器构建查询条件
         MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name", "xiaoming");
         //执行查询
