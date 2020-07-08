@@ -58,11 +58,11 @@ public class ElasticSearchTest {
     @Test
     public void createDocument() {
         List<User> list = new ArrayList<>();
-        list.add(new User(1, "xiaoming", "打球 电影 java开发 前端开发"));
-        list.add(new User(2, "xiaohong", "羽毛球 蜘蛛侠 python开发 vue"));
-        list.add(new User(3, "xiaohua", "游泳 电影 go开发 游戏"));
-        list.add(new User(4, "xiaoli", "主机游戏 小说 天天酷跑 做饭"));
-        list.add(new User(5, "xiaoliu", "数码 电子技术 可乐 鸡肉"));
+        list.add(new User(1, "xiaoming", "打球 电影 java开发 前端开发","1996-11-23"));
+        list.add(new User(2, "xiaohong", "羽毛球 蜘蛛侠 python开发 vue","1997-11-23"));
+        list.add(new User(3, "xiaohua", "游泳 电影 go开发 游戏","1996-10-23"));
+        list.add(new User(4, "xiaoli", "主机游戏 小说 天天酷跑 做饭","1996-12-23"));
+        list.add(new User(5, "xiaoliu", "数码 电子技术 可乐 鸡肉","1996-11-20"));
         // 接收对象集合，实现批量新增
         userRepository.saveAll(list);
     }

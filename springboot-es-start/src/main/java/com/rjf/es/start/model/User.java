@@ -18,26 +18,27 @@ public class User implements Serializable {
     @Id
     private Integer id;
 
-    /*
-     *   姓名
-     * */
+    // 姓名
     @Field(type = FieldType.Keyword)
     private String name;
 
-    /*
-     *   爱好
-     * */
+    // 爱好
     @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart")
     private String hobby;
+
+    // 生日
+    @Field(type = FieldType.Date )
+    private String birthday;
 
     // 这里无参构造必须保留,否则反序列化会失败
     public User() {
     }
 
-    public User(Integer id, String name, String hobby) {
+    public User(Integer id, String name, String hobby, String birthday) {
         this.id = id;
         this.name = name;
         this.hobby = hobby;
+        this.birthday = birthday;
     }
 
     public Integer getId() {
@@ -64,12 +65,21 @@ public class User implements Serializable {
         this.hobby = hobby;
     }
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", hobby='" + hobby + '\'' +
+                ", birthday='" + birthday + '\'' +
                 '}';
     }
 }
