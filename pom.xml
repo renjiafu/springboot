@@ -20,8 +20,8 @@
         <module>springboot-netty</module>
         <module>springboot-jpa</module>
         <module>springboot-thymeleaf</module>
-        <module>springboot-es</module>
-        <module>springboot-es-start</module>
+        <module>springboot-es-spring-data-es</module>
+        <module>springboot-es-high-level-rest-client</module>
     </modules>
 
 </project>
