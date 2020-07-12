@@ -1,4 +1,4 @@
-package com.rjf.es.start.dao;
+package com.rjf.es.start;
 
 /*
  *
@@ -6,7 +6,6 @@ package com.rjf.es.start.dao;
  *   2020/7/6 23:38
  */
 
-import com.rjf.es.start.model.User;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
@@ -26,5 +25,5 @@ public interface UserRepository extends ElasticsearchRepository<User, Integer> {
     @Query("{\"bool\" : {\"must\" : {\"field\" : {\"hobby\" : \"?\"}}}}")
     List<User> findByHobby(String hobby);
 
-
+    List<User> findByBirthdayBetween(String startTime, String endTime);
 }

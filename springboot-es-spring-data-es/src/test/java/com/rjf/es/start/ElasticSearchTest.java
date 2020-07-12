@@ -1,12 +1,12 @@
 package com.rjf.es.start;
 
-import com.rjf.es.start.dao.UserRepository;
-import com.rjf.es.start.model.User;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
-import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.metrics.valuecount.InternalValueCount;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
@@ -40,6 +41,7 @@ public class ElasticSearchTest {
 
     private Pageable pageable = PageRequest.of(0, 10);
 
+    // 索引操作
     @Test
     public void addIndexTest() {
         elasticsearchRestTemplate.createIndex(User.class);
@@ -51,25 +53,29 @@ public class ElasticSearchTest {
         boolean index001 = elasticsearchRestTemplate.deleteIndex("index001");
     }
 
-    /**
-     * 添加测试数据
-     */
+
+    // 文档操作
+
+    // 插入测试数据
     @Test
     public void createDocument() {
         List<User> list = new ArrayList<>();
-        list.add(new User(1, "xiaoming", "打球 电影 java开发 前端开发","1996-11-23"));
-        list.add(new User(2, "xiaohong", "羽毛球 蜘蛛侠 python开发 vue","1997-11-23"));
-        list.add(new User(3, "xiaohua", "游泳 电影 go开发 游戏","1996-10-23"));
-        list.add(new User(4, "xiaoli", "主机游戏 小说 天天酷跑 做饭","1996-12-23"));
-        list.add(new User(5, "xiaoliu", "数码 电子技术 可乐 鸡肉","1996-11-20"));
+        list.add(new User(1, "xiaoming", "c001", "打球 电影 java开发 前端开发", "1996-11-23"));
+        list.add(new User(2, "xiaohong", "c001", "羽毛球 蜘蛛侠 python开发 vue", "1997-11-23"));
+        list.add(new User(3, "xiaohua", "c002", "游泳 电影 go开发 游戏", "1996-10-23"));
+        list.add(new User(4, "xiaoli", "c002", "主机游戏 小说 天天酷跑 做饭", "1996-10-23"));
+        list.add(new User(5, "xiaoliu", "c003", "数码 电子技术 可乐 鸡肉", "1996-11-20"));
         // 接收对象集合，实现批量新增
         userRepository.saveAll(list);
     }
 
+    // 删除数据
+    @Test
+    public void deleteDocument() {
+        userRepository.deleteAll();
+    }
 
-    /**
-     * 查询全部
-     */
+    // 查询全部
     @Test
     public void findAll() {
 
@@ -77,22 +83,28 @@ public class ElasticSearchTest {
         all.forEach(System.out::println);
     }
 
+    // 查询全部 并按生日排序
+    @Test
+    public void findAllAndSortByBirthday() {
+        userRepository.findAll(Sort.by(Sort.Direction.DESC, "birthday"))
+                .forEach(System.out::println);
+    }
 
     // id查询
     @Test
-    public void searchById(){
+    public void searchById() {
         List<User> user = userRepository.findById("1");
         user.forEach(System.out::println);
     }
 
-    // 姓名查询
+    // 自定义查询 姓名查询
     @Test
-    public void searchByName01(){
+    public void searchByName01() {
         List<User> user = userRepository.findByName("xiaoming");
         user.forEach(System.out::println);
     }
 
-    // 姓名查询(构建器)
+    // 姓名查询(高级构建器)
     @Test
     public void searchByName02() {
         // 通过查询构建器构建查询条件
@@ -102,6 +114,12 @@ public class ElasticSearchTest {
         Users.forEach(System.out::println);
     }
 
+    // 自定义查询 根据生日范围
+    @Test
+    public void findAllBetweenBirthday() {
+        userRepository.findByBirthdayBetween("1996-11-20", "1997-01-01")
+                .forEach(System.out::println);
+    }
 
     // 爱好查询
     @Test
@@ -111,88 +129,70 @@ public class ElasticSearchTest {
     }
 
 
-    // 自定义分页
+    // 自定义高级查询
     @Test
-    public void searchSelfDefine() {
-        //构建自定义查询构建器
+    public void findAdvance() {
+
+        // 1. 自定义查询构建器
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
-        //添加基本的查询条件
-        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("hobby", "开发");
-        //执行查询获取分页结果集
-        nativeSearchQueryBuilder.withQuery(matchQueryBuilder);
 
-        Page<User> Users = this.userRepository.search(nativeSearchQueryBuilder.build());
-        System.out.println("Users.getTotalElements() = " + Users.getTotalElements());
-        System.out.println("Users.getTotalPages() = " + Users.getTotalPages());
+        // 2. 各种条件
+        // 分词条件
+        nativeSearchQueryBuilder.withQuery(QueryBuilders.matchQuery("hobby", "开发"));
+        // 排序条件
+        nativeSearchQueryBuilder.withSort(SortBuilders.fieldSort("birthday").order(SortOrder.DESC));
+        // 分页条件
+        nativeSearchQueryBuilder.withPageable(PageRequest.of(0, 10));
+
+
+        // 3. 执行查询获取结果集
+
+        Page<User> Users = userRepository.search(nativeSearchQueryBuilder.build());
+        System.out.println("总条数 ---> " + Users.getTotalElements());
+        System.out.println("总页数 ---> " + Users.getTotalPages());
         Users.forEach(System.out::println);
 
     }
 
 
-    // 分页查询
+    // 简单聚合
     @Test
-    public void testNativeQuery() {
-        // 构建查询条件
+    public void testCountId() {
+        // 构造查询条件
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        // 添加基本的分词查询
-        queryBuilder.withQuery(QueryBuilders.termQuery("hobby", "开发"));
+        // 不查询任何结果
+        queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{""}, null));
 
-        // 初始化分页参数
-        int page = 0;
-        int size = 10;
-        // 设置分页参数
-        queryBuilder.withPageable(PageRequest.of(page, size));
+        // 统计总数
+        queryBuilder.addAggregation(AggregationBuilders.count("id"));
 
-        // 执行搜索，获取结果
-        Page<User> Users = this.userRepository.search(queryBuilder.build());
-        // 打印总条数
-        System.out.println(Users.getTotalElements());
-        // 打印总页数
-        System.out.println(Users.getTotalPages());
-        // 每页大小
-        System.out.println(Users.getSize());
-        // 当前页
-        System.out.println(Users.getNumber());
-        Users.forEach(System.out::println);
+        AggregatedPage<User> people = (AggregatedPage<User>) userRepository.search(queryBuilder.build());
+        long idCount = ((InternalValueCount) people.getAggregation("id")).getValue();
+        System.out.println("统计总数 ---> " + idCount);
     }
-
 
     // 聚合
     @Test
-    public void testAggs() {
-
-        //初始化自定义构建查询器
+    public void testAgg() {
+        // 构建查询器
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-
-        //添加聚合
-        queryBuilder.addAggregation(AggregationBuilders.terms("agg").field("hobby"));
-
-        //添加结果集过滤不包括任何字段
+        // 结果集 过滤不包括任何字段
         queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{}, null));
-
-        //执行查询
-        AggregatedPage<User> UserPage = (AggregatedPage<User>) this.userRepository.search(queryBuilder.build());
-
+        // 聚合
+        queryBuilder.addAggregation(AggregationBuilders.terms("name").field("name"));
 
         /*
         解析聚合结果集,根据聚合的类型以及字段类型,要进行强转,不然无法获取桶
-        hobby-是字符串类型的,聚合类型是词条类型的
-        agg-通过聚合名称获取聚合对象
+        birthday-是字符串类型的,聚合类型是词条类型的
+        aggBir-通过聚合名称获取聚合对象
         使用StringTerms强转的时候出现错误
          */
 
-        ParsedStringTerms brandAgg = (ParsedStringTerms) UserPage.getAggregation("agg");
-
-        //获取桶
-        List<? extends Terms.Bucket> buckets = brandAgg.getBuckets();
-
-        //遍历输出
-        buckets.forEach(bucket -> {
-            System.out.println("bucket.getKeyAsString() = " + bucket.getKeyAsString());
-            //获取条数
-            System.out.println("bucket.getDocCount() = " + bucket.getDocCount());
-        });
-
+        // 执行查询
+        AggregatedPage<User> userAggregatedPage = (AggregatedPage<User>) userRepository.search(queryBuilder.build());
+        // 结果集处理
+        Aggregation name = userAggregatedPage.getAggregation("name");
+        System.out.println("计数id ---> " + name);
     }
 
 }

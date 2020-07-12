@@ -1,4 +1,4 @@
-package com.rjf.es.start.model;
+package com.rjf.es.start;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -22,23 +22,29 @@ public class User implements Serializable {
     @Field(type = FieldType.Keyword)
     private String name;
 
+    // 班级
+    @Field(type = FieldType.Keyword)
+    private String cls;
+
+    // 生日
+    @Field(type = FieldType.Keyword)
+    private String birthday;
+
     // 爱好
     @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart")
     private String hobby;
 
-    // 生日
-    @Field(type = FieldType.Date )
-    private String birthday;
 
     // 这里无参构造必须保留,否则反序列化会失败
     public User() {
     }
 
-    public User(Integer id, String name, String hobby, String birthday) {
+    public User(Integer id, String name, String cls, String hobby, String birthday) {
         this.id = id;
         this.name = name;
-        this.hobby = hobby;
+        this.cls = cls;
         this.birthday = birthday;
+        this.hobby = hobby;
     }
 
     public Integer getId() {
@@ -57,12 +63,12 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getHobby() {
-        return hobby;
+    public String getCls() {
+        return cls;
     }
 
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setCls(String cls) {
+        this.cls = cls;
     }
 
     public String getBirthday() {
@@ -73,13 +79,22 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", hobby='" + hobby + '\'' +
+                ", cls='" + cls + '\'' +
                 ", birthday='" + birthday + '\'' +
+                ", hobby='" + hobby + '\'' +
                 '}';
     }
 }
