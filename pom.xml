@@ -21,7 +21,7 @@
         <module>springboot-jpa</module>
         <module>springboot-thymeleaf</module>
         <module>springboot-es-spring-data-es</module>
-        <module>springboot-es-high-level-rest-client</module>
+        <module>springboot-es-rest-high-level-client</module>
     </modules>
 
 </project>

@@ -1,4 +1,4 @@
-package com.rjf.es.hlrc;
+package com.rjf.es.rhlc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *   2020/7/1 7:35
  */
 @SpringBootApplication
-public class EsRestApp {
+public class ElasticSearchRestHighLevelClientApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(EsRestApp.class);
+        SpringApplication.run(ElasticSearchRestHighLevelClientApp.class);
     }
 }
