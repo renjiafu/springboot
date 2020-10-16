@@ -1,4 +1,4 @@
-package com.rjf.time.server;
+package com.rjf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
