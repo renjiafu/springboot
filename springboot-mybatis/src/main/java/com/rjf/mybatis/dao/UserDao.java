@@ -35,6 +35,4 @@ public interface UserDao {
     @Delete("delete from user where id=#{id}")
     int delete(Integer id);
 
-
-
 }

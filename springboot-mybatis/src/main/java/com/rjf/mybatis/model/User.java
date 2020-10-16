@@ -1,10 +1,10 @@
 package com.rjf.mybatis.model;
 
 public class User {
+
     private Integer id;
     private String name;
     private String password;
-
 
 
     public int getId() {

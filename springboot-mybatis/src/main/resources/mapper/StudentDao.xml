@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rjf.mybatis.dao.StudentDao">
 
-
     <!--student对象-->
     <resultMap id="Base_Student" type="Student" autoMapping="true">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -25,11 +24,11 @@
 
     <!--多查询-->
     <select id="getStudentByStudent" resultMap="Base_Student">
-        select
+        SELECT
             id,
             stu_name,
             stu_age
-        from student s
+        FROM student s
         <where>
             <if test="id !=null">
                 and s.id=#{id}
@@ -43,14 +42,17 @@
 
     <!--列表查询-->
     <select id="getStudentList" resultMap="Base_Student">
-        select * from student limit #{index},#{pageSize}
+        SELECT * FROM student limit #{index},#{pageSize}
     </select>
 
     <!--增添-->
     <insert id="insertStudent" >
-        insert into student
-        (id,stu_name,stu_age)
-        values(
+        INSERT INTO student (
+        id,
+        stu_name,
+        stu_age
+        )
+        VALUES(
         #{id},
         #{stuName},
         #{stuAge}
@@ -59,19 +61,19 @@
 
     <!--更新-->
     <update id="updateStudent">
-        update student
+        UPDATE student
         <set>
             <if test="stuName != null">
                 stu_name = #{stuName},
             </if>
         </set>
-        where id = #{id}
+        WHERE id = #{id}
     </update>
 
     <!--删除-->
     <delete id="deleteStudent">
-        delete from student
-        where id in
+        DELETE FROM student
+        WHERE id IN
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
         </foreach>
