@@ -23,6 +23,8 @@
         <module>springboot-es-spring-data-es</module>
         <module>springboot-es-rest-high-level-client</module>
         <module>springboot-shiro</module>
+        <module>springboot-redis</module>
+        <module>springboot-time-server</module>
     </modules>
 
 </project>
