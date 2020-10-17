@@ -2,7 +2,7 @@ package com.rjf.mybatis.model;
 
 public class Student {
 
-    private Integer id;
+    private Integer stuId;
     private String stuName;
     private Integer stuAge;
 
@@ -10,18 +10,18 @@ public class Student {
     public Student() {
     }
 
-    public Student(Integer id, String stuName, Integer stuAge) {
-        this.id = id;
+    public Student(Integer stuId, String stuName, Integer stuAge) {
+        this.stuId = stuId;
         this.stuName = stuName;
         this.stuAge = stuAge;
     }
 
     public Integer getId() {
-        return id;
+        return stuId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer stuId) {
+        this.stuId = stuId;
     }
 
     public String getStuName() {
@@ -43,7 +43,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
+                "stuId=" + stuId +
                 ", stuName='" + stuName + '\'' +
                 ", stuAge=" + stuAge +
                 '}';

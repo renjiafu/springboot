@@ -4,13 +4,13 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://docker:3306/z_mybatis?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
     password: root
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.rjf.model
+  type-aliases-package: com.rjf.mybatis.model
 
 logging:
   level:

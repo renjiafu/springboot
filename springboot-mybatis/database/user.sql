@@ -1,6 +1,6 @@
-CREATE TABLE `mybatis`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-COMMENT = '用户表';
+CREATE TABLE `user` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `user_password` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户表';

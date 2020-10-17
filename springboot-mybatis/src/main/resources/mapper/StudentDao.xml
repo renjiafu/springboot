@@ -6,7 +6,7 @@
 
     <!--student对象-->
     <resultMap id="Base_Student" type="Student" autoMapping="true">
-        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id  property="stuId" column="stu_id" jdbcType="INTEGER"/>
         <result property="stuName" column="stu_name" jdbcType="VARCHAR"/>
         <result property="stuAge" column="stu_age" jdbcType="INTEGER"/>
 <!--
@@ -19,19 +19,19 @@
 
     <!--单查询-->
     <select id="getStudentById" resultMap="Base_Student">
-        select  * from student where id=#{id}
+        select  * from student where stu_id=#{id}
     </select>
 
     <!--多查询-->
     <select id="getStudentByStudent" resultMap="Base_Student">
         SELECT
-            id,
+            stu_id,
             stu_name,
             stu_age
         FROM student s
         <where>
             <if test="id !=null">
-                and s.id=#{id}
+                and s.stu_id=#{id}
             </if>
             <if test="stuName !=null">
                 and s.stu_name=#{stuName}
@@ -48,12 +48,12 @@
     <!--增添-->
     <insert id="insertStudent" >
         INSERT INTO student (
-        id,
+        stu_id,
         stu_name,
         stu_age
         )
         VALUES(
-        #{id},
+        #{stuId},
         #{stuName},
         #{stuAge}
         )
@@ -67,13 +67,13 @@
                 stu_name = #{stuName},
             </if>
         </set>
-        WHERE id = #{id}
+        WHERE stuId = #{id}
     </update>
 
     <!--删除-->
     <delete id="deleteStudent">
         DELETE FROM student
-        WHERE id IN
+        WHERE stu_id IN
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
         </foreach>
