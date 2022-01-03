@@ -1,0 +1,5 @@
+FROM java:8
+MAINTAINER rene 1546500177@qq.com
+ADD target/*.jar timeApp.jar
+EXPOSE  8080
+ENTRYPOINT ["java", "-jar", "/timeApp.jar"]
